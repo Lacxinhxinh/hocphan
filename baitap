@@ -1,0 +1,138 @@
+package Modules;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.nio.Buffer;
+import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.Scanner;
+//import java.util.Scanner;
+
+
+public class Modules {
+	private String namemodules;
+	private String idmodules;
+	private String moduletype;
+	private String credithour;
+	private String departmental;
+	//get,set
+	public String getNamemodules() {
+		return namemodules;
+	}
+	public void setNamemodules(String namemodules) {
+		this.namemodules = namemodules;
+	}
+	public String getIdmodules() {
+		return idmodules;
+	}
+	public void setIdmodules(String idmodules) {
+		this.idmodules = idmodules;
+	}
+	public String getModuletype() {
+		return moduletype;
+	}
+	public void setModuletype(String moduletype) {
+		this.moduletype = moduletype;
+	}
+	public String getCredithour() {
+		return credithour;
+	}
+	public void setCredithour(String credithour) {
+		this.credithour = credithour;
+	}
+	public String getDepartmental() {
+		return departmental;
+	}
+	public void setDepartmental(String departmental) {
+		this.departmental = departmental;
+	}
+	//setall
+	public void setall(String namemodules, String idmodules, String moduletype, String credithour, String departmental) {
+		
+		this.namemodules = namemodules;
+		this.idmodules = idmodules;
+		this.moduletype = moduletype;
+		this.credithour = credithour;
+		this.departmental = departmental;
+	}
+	
+	//constructor
+	public Modules() {};
+	public Modules(String namemodules, String idmodules, String moduletype, String credithour, String departmental) {
+	
+		this.namemodules = namemodules;
+		this.idmodules = idmodules;
+		this.moduletype = moduletype;
+		this.credithour = credithour;
+		this.departmental = departmental;
+	}
+	//nhap
+	public void input() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Moi nhap ten hoc phan: ");
+		namemodules=sc.nextLine();
+		System.out.println("Moi nhap id hoc phan: ");
+		idmodules=sc.nextLine();
+		System.out.println("Moi nhap loai hoc phan: ");
+		moduletype=sc.nextLine();
+		System.out.println("Moi nhap so tin chi: ");
+		credithour=sc.nextLine();
+		System.out.println("Moi nhap khoa: ");
+		departmental=sc.nextLine();
+	}
+	//hienthi
+	public void output() {
+		System.out.println("Ten hoc phan: "+getNamemodules());
+		System.out.println("ID hoc phan: "+getIdmodules());
+		System.out.println("Loai hoc phan: "+getModuletype());
+		System.out.println("So tin chi: "+getCredithour());
+		System.out.println("Khoa: "+getDepartmental());
+	}
+	
+	
+           public static void inputfile(){
+               ArrayList<Modules> list= new ArrayList<Modules>();
+                try {
+                  FileWriter fw= new FileWriter("D:\\BackEnd\\seed.txt");
+			BufferedWriter bw = new BufferedWriter(fw);
+			while(true) {
+				String st = new Scanner(System.in).nextLine();
+				if(st==null||st=="") break;
+				bw.write(st);
+				bw.newLine();
+			}
+			bw.close();
+			fw.close();
+               } catch (Exception e) {
+                  e.printStackTrace();
+               }
+   }
+           
+	   public static void main(String[] args) {
+               ArrayList<Modules> list = new ArrayList<Modules>();
+               try {
+                   FileReader fr = new FileReader("D:\\BackEnd\\seed.txt");
+                   BufferedReader br = new BufferedReader(fr);
+                   while(true){
+                       String st= br.readLine();
+                       if(st==null||st=="") break;
+                       String[] dt= st.split("[;]");
+                       list.add(new Modules(dt[0],dt[1],dt[2],dt[3],dt[4]));
+                       
+                       
+                   }
+                   br.close();
+                   fr.close();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+               for(Modules cc:list){
+                   System.out.println("--------");
+                   cc.output();
+               }
+               
+               inputfile();
+           }
+    }
+
+ 
